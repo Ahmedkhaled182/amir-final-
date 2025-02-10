@@ -22,19 +22,29 @@ function App() {
   const updateCart = (product, action) => {
     setCartItems((prevCart) => {
       const existingProduct = prevCart.find((item) => item.ID === product.ID);
-      if (existingProduct) {
-        return prevCart.map((item) => 
-          item.ID === product.ID 
-            ? { ...item, productId: item.ID, quantity: action === 'add' ? item.quantity + 1 : Math.max(0, item.quantity - 1) }
-            : item
-        ).filter(item => item.quantity > 0);
-      }
-      return action === 'add' 
-        ? [...prevCart, { ...product, productId: product.ID, quantity: 1 }] 
-        : prevCart;
-    });
-  };
 
+      if (existingProduct) {
+        const updatedCart = prevCart.map((item) => {
+          if (item.ID === product.ID) {
+            if (action === 'add') {
+              return { ...item, productId: item.ID, quantity: item.quantity + 1 };
+            } else {
+              return { ...item, productId: item.ID, quantity: Math.max(0, item.quantity - 1) };
+            }
+          } else {
+            return item;
+          }
+        }).filter(item => item.quantity > 0);
+        return updatedCart;
+      }
+
+      if (action === 'add') {
+        return [...prevCart, { ...product, productId: product.ID, quantity: 1 }];
+      }
+
+      return prevCart;
+    });
+};
   const navigateTo = (targetPage) => setPage(targetPage);
 
   const handleLogout = () => {
@@ -52,10 +62,10 @@ function App() {
 
   const pages = {
     home: <HomePage navigateTo={navigateTo} goToCart={() => setPage('cart')} />,
-    BrandA: <BrandA goBack={() => setPage('home')} addToCart={(product) => updateCart(product, 'add')} />,
-    BrandB: <BrandB goBack={() => setPage('home')} addToCart={(product) => updateCart(product, 'add')} />,
-    BrandC: <BrandC goBack={() => setPage('home')} addToCart={(product) => updateCart(product, 'add')} />,
-    cart: <Cart cartItems={cartItems} goBack={() => setPage('home')} removeFromCart={(productId) => {
+    BrandA: <BrandA  addToCart={(product) => updateCart(product, 'add')} />,
+    BrandB: <BrandB  addToCart={(product) => updateCart(product, 'add')} />,
+    BrandC: <BrandC  addToCart={(product) => updateCart(product, 'add')} />,
+    cart: <Cart cartItems={cartItems} removeFromCart={(productId) => {
       const product = cartItems.find(item => item.ID === productId);
       if (product) updateCart(product, 'remove');
     }} proceedToCheckout={() => setPage('checkout')} />,

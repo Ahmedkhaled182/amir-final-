@@ -22,7 +22,6 @@ const generateToken = (id) => {
     return jwt.sign({ id }, secret_key, { expiresIn: '1h' });
 };
 
-// Middleware to verify token
 const verifyToken = (req, res, next) => {
     const token = req.cookies.authToken;
     if (!token) return res.status(401).send('Unauthorized');
@@ -34,7 +33,6 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// User Login Route
 server.post('/user/login', (req, res) => {
     const { email, password } = req.body;
 
@@ -66,7 +64,7 @@ server.post('/user/login', (req, res) => {
     });
 });
 
-// User Registration Route
+
 server.post('/user/register', (req, res) => {
     const { name, email, password } = req.body;
 
@@ -93,7 +91,6 @@ server.post('/user/register', (req, res) => {
     });
 });
 
-// Protected Route: Checkout (Requires Authentication)
 server.post('/orders/checkout', (req, res) => {
     const { userId, cartItems, totalPrice, address, phone } = req.body;
 
