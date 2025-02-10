@@ -14,11 +14,10 @@ const Checkout = ({ cartItems, totalPrice, userId, goBack }) => {
       return;
     }
 
-    if (Object.values(formData).some(field => !field)) {
+    if (!formData.name || !formData.email || !formData.address || !formData.phone) {
       alert('Please fill in all the required fields.');
       return;
     }
-
     try {
       const response = await fetch('http://localhost:555/orders/checkout', {
         method: 'POST',
