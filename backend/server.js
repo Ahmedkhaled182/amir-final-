@@ -98,7 +98,6 @@ server.post('/orders/checkout', (req, res) => {
         return res.status(400).json({ error: 'Missing required fields.' });
     }
 
-    let errors = [];
     let success = true;
 
     cartItems.forEach(cartItem => {
@@ -108,7 +107,6 @@ server.post('/orders/checkout', (req, res) => {
             (err) => {
                 if (err) {
                     console.error('Error inserting order:', err);
-                    errors.push(err);
                     success = false;
                 }
             }
