@@ -1,20 +1,13 @@
 import React from 'react';
 import './cart.css';
 
-const Cart = ({ cartItems,goBack, removeFromCart: RemovefromCart, proceedToCheckout }) => {
+const Cart = ({ cartItems, goBack, removeFromCart: RemovefromCart, proceedToCheckout }) => {
   const totalPrice = cartItems.reduce((acc, item) => acc + item.PRICE * item.quantity, 0);
 
   const handleCheckout = () => {
-    const formattedCartItems = cartItems.map(item => ({
-      productId: item.ID, 
-      quantity: item.quantity,
-      price: item.PRICE
-    }));
-    
-    proceedToCheckout(formattedCartItems);
+    proceedToCheckout(cartItems);
   };
 
-  
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
@@ -32,7 +25,7 @@ const Cart = ({ cartItems,goBack, removeFromCart: RemovefromCart, proceedToCheck
                 </div>
                 <div>${(item.PRICE * item.quantity).toFixed(2)}</div>
                 <button
-                  onClick={() => RemovefromCart(item.ID)} // Use 'ID' instead of 'id'
+                  onClick={() => RemovefromCart(item.ID)}
                   className="remove-cart-button"
                 >
                   Remove
@@ -50,4 +43,4 @@ const Cart = ({ cartItems,goBack, removeFromCart: RemovefromCart, proceedToCheck
   );
 };
 
-export default Cart;
+export default Cart;
