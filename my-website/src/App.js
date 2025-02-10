@@ -28,7 +28,7 @@ function App() {
           item.ID === product.ID
             ? { ...item, productId: item.ID, quantity: action === 'add' ? item.quantity + 1 : Math.max(0, item.quantity - 1) }
             : item
-        ).filter(item => item.quantity > 0); // Remove items with zero quantity
+        ).filter(item => item.quantity > 0);
       }
 
       if (action === 'add') {

@@ -1,8 +1,8 @@
-/* Navbar Container */
+
 .navbar {
   display: flex;
-  justify-content: space-around; /* Distributes buttons evenly */
-  align-items: center; /* Vertically centers buttons */
+  justify-content: space-around; 
+  align-items: center; 
   background-color: #000000;
   padding: 10px;
   position: relative;
@@ -10,7 +10,7 @@
   z-index: 1000;
 }
 
-/* Navbar Buttons */
+
 .navbar button {
   background-color: #6d6d6d;
   color: white;
@@ -22,7 +22,7 @@
   margin: 5px;
 }
 
-/* Navbar Buttons Hover Effect */
+
 .navbar button:hover {
   background-color: #0056b3;
 }

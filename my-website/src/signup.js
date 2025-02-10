@@ -18,10 +18,10 @@ const SignUp = ({ toggleAuthPage }) => {
 
       const result = await response.text();
       if (response.ok) {
-        alert(result); // User registered successfully
-        toggleAuthPage(); // Navigate to login
+        alert(result); 
+        toggleAuthPage(); 
       } else {
-        alert(`Error: ${result}`); // Display server error
+        alert(`Error: ${result}`);
       }
     } catch (error) {
       console.error('Error during sign-up:', error);

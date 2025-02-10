@@ -46,7 +46,7 @@ const Checkout = ({ cartItems, totalPrice, userId, goBack }) => {
       <form className="checkout-form">
         {['name', 'email', 'address', 'phone'].map(field => (
           <div className="form-group" key={field}>
-            <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
+            <label></label>
             <input
               type={field === 'email' ? 'email' : 'text'}
               name={field}

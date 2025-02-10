@@ -1,9 +1,8 @@
 const sqlite = require('sqlite3');
 
-// Initialize the database
+
 const db = new sqlite.Database('clothing_outlet.db');
 
-// Table creation queries
 const createUserTable = `
 CREATE TABLE IF NOT EXISTS USERS (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +44,7 @@ CREATE TABLE IF NOT EXISTS PRODUCTS (
     IMAGE TEXT NOT NULL
 );`;
 
-// Function to insert products only if they do not exist
+
 const insertProductsIfNotExists = () => {
     db.get('SELECT COUNT(*) AS count FROM PRODUCTS', (err, row) => {
         if (err) {
@@ -70,7 +69,6 @@ const insertProductsIfNotExists = () => {
     });
 };
 
-// Initialize tables
 db.serialize(() => {
     db.run(createUserTable);
     db.run(createCartTable);
